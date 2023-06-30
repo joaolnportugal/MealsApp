@@ -1,13 +1,26 @@
+// import "react-native-gesture-handler";
+
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import CategoryScreen from "./screens/CategoryScreen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View>
-      <StatusBar style="light" />
-      <CategoryScreen />
-    </View>
+    <>
+      <StatusBar style="dark" />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="MealsCategories" component={CategoryScreen} />
+        </Stack.Navigator>
+
+        {/* <CategoryScreen /> */}
+      </NavigationContainer>
+    </>
   );
 }
 
