@@ -9,6 +9,7 @@ import MealsOverViewScreen from "./screens/MealsOverViewScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
 import { Ionicons } from "./node_modules/@expo/vector-icons/build/Icons";
+import FavoritesContextProvider from "./store/context/favorites-context";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -59,33 +60,38 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: "#ffaa00" },
-            headerTintColor: "white",
-            contentStyle: { backgroundColor: "#947200" },
-          }}
-        >
-          <Stack.Screen
-            name="Drawer"
-            component={DrawerNavigator}
-            options={{
-              headerShown: false,
+      <FavoritesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "#ffaa00" },
+              headerTintColor: "white",
+              contentStyle: { backgroundColor: "#947200" },
             }}
-          />
-          <Stack.Screen name="MealsOverView" component={MealsOverViewScreen} />
-          <Stack.Screen
-            name="MealDetail"
-            component={MealDetailScreen}
-            options={{
-              title: "Meal Details",
-            }}
-          />
-        </Stack.Navigator>
+          >
+            <Stack.Screen
+              name="Drawer"
+              component={DrawerNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="MealsOverView"
+              component={MealsOverViewScreen}
+            />
+            <Stack.Screen
+              name="MealDetail"
+              component={MealDetailScreen}
+              options={{
+                title: "Meal Details",
+              }}
+            />
+          </Stack.Navigator>
 
-        {/* <CategoryScreen /> */}
-      </NavigationContainer>
+          {/* <CategoryScreen /> */}
+        </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   );
 }
